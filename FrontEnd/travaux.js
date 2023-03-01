@@ -9,30 +9,132 @@ export async function recherchetravaux() {
         return error;
     }  
 }
-function filtreobjet() {
-    console.log("fonction bien lancée");
+
+function effacerdom() {
+    const effacer = document.querySelector(".gallery");
+    effacer.replaceChildren();
 }
-const allwork = document.getElementById("tous");
-allwork.addEventListener("click", function() {
-    filtreobjet()
+
+function filtretout() {
+    /*const effacer = document.getElementById("portfolio");*/
+    effacerdom()
+    
+
+
+    const section = document.getElementById("portfolio");
+    const galerie = document.querySelector(".gallery");
+    
+    for (let i=0; i<travaux.length; i++) {
+    const figure = document.createElement("figure");
+    const image = document.createElement("img");
+    image.scr = travaux[i].imageUrl;
+    image.setAttribute('src', image.scr);
+    figure.appendChild(image);
+    galerie.appendChild(figure);
+    const title = document.createElement("figcaption");
+    title.innerHTML = travaux[i].title;
+    figure.appendChild(title);
+    galerie.appendChild(figure);
+    };
+}
+
+function filtreobjets() {
+    /*const effacer = document.getElementById("portfolio");
+    const effacer = document.querySelector(".gallery");
+    effacer.remove();*/
+    effacerdom();
+
+    const section = document.getElementById("portfolio");
+    const galerie = document.querySelector(".gallery");
+     
+    for (let i=0; i<travaux.length; i++) {
+    let categ = travaux[i].categoryId;   
+      
+    if (categ == 1) {
+        const figure = document.createElement("figure");
+        const image = document.createElement("img");
+        image.scr = travaux[i].imageUrl;
+        image.setAttribute('src', image.scr);
+        figure.appendChild(image);
+        galerie.appendChild(figure);
+        const title = document.createElement("figcaption");
+        title.innerHTML = travaux[i].title;
+        figure.appendChild(title);
+        galerie.appendChild(figure);
+    }
+    };
+}
+
+function filtreappartements() {
+    /*const effacer = document.getElementById("portfolio");
+    const effacer = document.querySelector(".gallery");
+    effacer.remove();*/
+    effacerdom();
+
+    const section = document.getElementById("portfolio");
+    const galerie = document.querySelector(".gallery");
+     
+    for (let i=0; i<travaux.length; i++) {
+    let categ = travaux[i].categoryId;   
+      
+    if (categ == 2) {
+        const figure = document.createElement("figure");
+        const image = document.createElement("img");
+        image.scr = travaux[i].imageUrl;
+        image.setAttribute('src', image.scr);
+        figure.appendChild(image);
+        galerie.appendChild(figure);
+        const title = document.createElement("figcaption");
+        title.innerHTML = travaux[i].title;
+        figure.appendChild(title);
+        galerie.appendChild(figure);
+    }
+    };
+}
+
+function filtrehotelsretaurants() {
+    /*const effacer = document.getElementById("portfolio");
+    const effacer = document.querySelector(".gallery");
+    effacer.remove();*/
+    effacerdom();
+    
+    const section = document.getElementById("portfolio");
+    const galerie = document.querySelector(".gallery");
+     
+    for (let i=0; i<travaux.length; i++) {
+    let categ = travaux[i].categoryId;   
+     
+    if (categ == 3) {
+        const figure = document.createElement("figure");
+        const image = document.createElement("img");
+        image.scr = travaux[i].imageUrl;
+        image.setAttribute('src', image.scr);
+        figure.appendChild(image);
+        galerie.appendChild(figure);
+        const title = document.createElement("figcaption");
+        title.innerHTML = travaux[i].title;
+        figure.appendChild(title);
+        galerie.appendChild(figure);
+    }
+    };
+}
+const toutletravail = document.getElementById("tous");
+toutletravail.addEventListener("click", function() {
+    filtretout()
 })
-const section = document.getElementById("portfolio");
-const galerie = document.querySelector(".gallery");
-console.log(galerie);
+const toutlesobjets = document.getElementById("objets");
+toutlesobjets.addEventListener("click", function() {
+    filtreobjets()
+})
+const toutlesappartements = document.getElementById("appartements");
+toutlesappartements.addEventListener("click", function() {
+    filtreappartements()
+})
+const toutleshotelsretaurants = document.getElementById("hotelsretaurants");
+toutleshotelsretaurants.addEventListener("click", function() {
+    filtrehotelsretaurants()
+})
+
+
 const travaux = await recherchetravaux();
-for (let i=0; i<travaux.length; i++) {
-const figure = document.createElement("figure");
-const image = document.createElement("img");
-image.scr = travaux[i].imageUrl;
-image.setAttribute('src', image.scr);
-figure.appendChild(image);
-galerie.appendChild(figure);
-const title = document.createElement("figcaption");
-title.innerHTML = travaux[i].title;
-figure.appendChild(title);
-galerie.appendChild(figure);
-};
-
-
-
-
+filtretout(); 
