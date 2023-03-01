@@ -205,3 +205,25 @@ footer nav ul {
 .filtre-item:hover {
     background-color: #1D6154;
 }
+a {
+    color: black;
+	text-decoration:none;
+}
+a:hover {
+	color: #B1663C;
+}
+.centrer {
+	text-align: center;
+}
+.decale {
+	margin-left: 35%;
+}
+#saisieemail, #saisiemotdepasse {
+	margin-top: 2px;
+	height: 25px;
+	width: 379px;
+	border: 0;
+}
+.boutonenvoyer {
+	text-align: center;
+}
