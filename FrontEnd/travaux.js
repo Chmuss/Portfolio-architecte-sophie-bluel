@@ -16,11 +16,8 @@ function effacerdom() {
 }
 
 function filtretout() {
-    /*const effacer = document.getElementById("portfolio");*/
     effacerdom()
     
-
-
     const section = document.getElementById("portfolio");
     const galerie = document.querySelector(".gallery");
     
@@ -39,9 +36,6 @@ function filtretout() {
 }
 
 function filtreobjets() {
-    /*const effacer = document.getElementById("portfolio");
-    const effacer = document.querySelector(".gallery");
-    effacer.remove();*/
     effacerdom();
 
     const section = document.getElementById("portfolio");
@@ -66,9 +60,6 @@ function filtreobjets() {
 }
 
 function filtreappartements() {
-    /*const effacer = document.getElementById("portfolio");
-    const effacer = document.querySelector(".gallery");
-    effacer.remove();*/
     effacerdom();
 
     const section = document.getElementById("portfolio");
@@ -93,9 +84,6 @@ function filtreappartements() {
 }
 
 function filtrehotelsretaurants() {
-    /*const effacer = document.getElementById("portfolio");
-    const effacer = document.querySelector(".gallery");
-    effacer.remove();*/
     effacerdom();
     
     const section = document.getElementById("portfolio");
