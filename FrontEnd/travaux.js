@@ -122,7 +122,17 @@ const toutleshotelsretaurants = document.getElementById("hotelsretaurants");
 toutleshotelsretaurants.addEventListener("click", function() {
     filtrehotelsretaurants()
 })
+/*const introPara = document.getElementById("valeurlogin");
+console.log(introPara.innerText);*/
+if (localStorage.getItem("token") !== null) {
+    
+    
+    valeurlogin.textContent = "logout";
 
+}  else {    
+    valeurlogin.textContent = "login"
+    
+}
 
 const travaux = await recherchetravaux();
 filtretout(); 
