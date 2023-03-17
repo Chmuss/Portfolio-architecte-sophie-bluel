@@ -122,17 +122,37 @@ const toutleshotelsretaurants = document.getElementById("hotelsretaurants");
 toutleshotelsretaurants.addEventListener("click", function() {
     filtrehotelsretaurants()
 })
-/*const introPara = document.getElementById("valeurlogin");
-console.log(introPara.innerText);*/
+
+
+let affichebandeau = document.getElementById("bandeau");
+let affichemodifier1 = document.getElementById("modifier1");
+let affichemodifier2 = document.getElementById("modifier2");
+
 if (localStorage.getItem("token") !== null) {
     
     
     valeurlogin.textContent = "logout";
+    visible();
 
 }  else {    
-    valeurlogin.textContent = "login"
+    valeurlogin.textContent = "login";
+    nonvisible();
+    
+}
+
+function nonvisible() {
+    affichebandeau.style.visibility = "hidden";
+    affichemodifier1.style.visibility = "hidden";
+    affichemodifier2.style.visibility = "hidden";
+    
+    
+}
+function visible() {
+    affichebandeau.style.visibility = "visible";
+    affichemodifier1.style.visibility = "visible";
+    affichemodifier2.style.visibility = "visible";
     
 }
 
 const travaux = await recherchetravaux();
-filtretout(); 
+filtretout();
