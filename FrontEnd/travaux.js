@@ -13,6 +13,8 @@ export async function recherchetravaux() {
 function effacerdom() {
     const effacer = document.querySelector(".gallery");
     effacer.replaceChildren();
+    const effacer2 = document.querySelector(".gallery2");
+    effacer2.replaceChildren();
 }
 
 function filtretout() {
@@ -32,6 +34,22 @@ function filtretout() {
     title.innerHTML = travaux[i].title;
     figure.appendChild(title);
     galerie.appendChild(figure);
+    };
+
+    const section2 = document.getElementById("portfolio");
+    const galerie2 = document.querySelector(".gallery2");
+    
+    for (let i=0; i<travaux.length; i++) {
+    const figure2 = document.createElement("figure2");
+    const image2 = document.createElement("img");
+    image2.scr = travaux[i].imageUrl;
+    image2.setAttribute('src', image2.scr);
+    figure2.appendChild(image2);
+    galerie2.appendChild(figure2);
+    const title2 = document.createElement("figcaption");
+    title2.innerHTML = "éditer";
+    figure2.appendChild(title2);
+    galerie2.appendChild(figure2);
     };
 }
 
@@ -55,6 +73,27 @@ function filtreobjets() {
         title.innerHTML = travaux[i].title;
         figure.appendChild(title);
         galerie.appendChild(figure);
+    }
+    };
+
+
+    const section2 = document.getElementById("portfolio");
+    const galerie2 = document.querySelector(".gallery2");
+     
+    for (let i=0; i<travaux.length; i++) {
+    let categ2 = travaux[i].categoryId;   
+      
+    if (categ2 == 1) {
+        const figure2 = document.createElement("figure2");
+        const image2 = document.createElement("img");
+        image2.scr = travaux[i].imageUrl;
+        image2.setAttribute('src', image2.scr);
+        figure2.appendChild(image2);
+        galerie2.appendChild(figure2);
+        const title2 = document.createElement("figcaption");
+        title2.innerHTML = "éditer";
+        figure2.appendChild(title2);
+        galerie2.appendChild(figure2);
     }
     };
 }
@@ -81,6 +120,29 @@ function filtreappartements() {
         galerie.appendChild(figure);
     }
     };
+
+
+
+    const section2 = document.getElementById("portfolio");
+    const galerie2 = document.querySelector(".gallery2");
+     
+    for (let i=0; i<travaux.length; i++) {
+    let categ2 = travaux[i].categoryId;   
+      
+    if (categ2 == 2) {
+        const figure2 = document.createElement("figure2");
+        const image2 = document.createElement("img");
+        image2.scr = travaux[i].imageUrl;
+        image2.setAttribute('src', image2.scr);
+        figure2.appendChild(image2);
+        galerie2.appendChild(figure2);
+        const title2 = document.createElement("figcaption");
+        title2.innerHTML = "éditer";
+        figure2.appendChild(title2);
+        galerie2.appendChild(figure2);
+    }
+    };
+
 }
 
 function filtrehotelsretaurants() {
@@ -103,6 +165,27 @@ function filtrehotelsretaurants() {
         title.innerHTML = travaux[i].title;
         figure.appendChild(title);
         galerie.appendChild(figure);
+    }
+    };
+
+
+    const section2 = document.getElementById("portfolio");
+    const galerie2 = document.querySelector(".gallery2");
+     
+    for (let i=0; i<travaux.length; i++) {
+    let categ2 = travaux[i].categoryId;   
+     
+    if (categ2 == 3) {
+        const figure2 = document.createElement("figure2");
+        const image2 = document.createElement("img");
+        image2.scr = travaux[i].imageUrl;
+        image2.setAttribute('src', image2.scr);
+        figure2.appendChild(image2);
+        galerie2.appendChild(figure2);
+        const title2 = document.createElement("figcaption");
+        title2.innerHTML = "éditer";
+        figure2.appendChild(title2);
+        galerie2.appendChild(figure2);
     }
     };
 }

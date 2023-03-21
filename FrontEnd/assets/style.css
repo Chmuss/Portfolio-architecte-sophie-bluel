@@ -300,3 +300,35 @@ h3 {
 	text-align: center;
 	font-size: 26px;
 }
+.gallery2 {
+	width: 100%;
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+	grid-column-gap: 20px;
+	grid-row-gap: 20px;
+}
+.gallery2 img {
+	width: 100%;
+
+}
+.trait {
+	border-top: 2px solid #B3B3B3;
+	margin-left: 105px;
+	margin-right: 105px;
+}
+.ajoutphoto {
+	margin: auto;
+	text-align: center;
+	background-color: #1D6154;
+	border: 1px #1D6154 solid;
+    border-radius: 60px;
+	padding: 10px 40px 10px 40px;
+    font-weight: 700;
+	color: white;
+	width: 130px;
+}
+#supprime {
+	display:block;
+	text-align:center;
+	color: #D65353;
+}
