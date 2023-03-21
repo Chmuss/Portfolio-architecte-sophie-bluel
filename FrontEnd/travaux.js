@@ -156,3 +156,38 @@ function visible() {
 
 const travaux = await recherchetravaux();
 filtretout();
+
+let ouverturemodal = null;
+
+const openModal = function (e) {
+    e.preventDefault();
+    /*const target = document.querySelector(e.target.getAttribute('href'));*/
+    const target = document.querySelector(".modal");
+    target.style.display = null;
+    target.removeAttribute('aria-hidden');
+    target.setAttribute('aria-modal', 'true');
+    ouverturemodal = target;
+    ouverturemodal.addEventListener('click',closemodal);
+    ouverturemodal.querySelector('.js-modal-close').addEventListener('click', closemodal);
+    ouverturemodal.querySelector('.modalwrapper').addEventListener('click', stopPropagation)
+}
+
+const closemodal = function (e) {
+    if (ouverturemodal === null) return;
+    e.preventDefault();
+    ouverturemodal.style.display = "none";
+    ouverturemodal.setAttribute('aria-modal', 'true');
+    ouverturemodal.removeAttribute('aria-modal');
+    ouverturemodal.removeEventListener('click', closemodal);
+    ouverturemodal.querySelector('.js-modal-close').removeEventListener('click', closemodal);
+    ouverturemodal.querySelector('.modalwrapper').removeEventListener('click', stopPropagation)
+    ouverturemodal= null
+    
+}
+
+const stopPropagation = function (e) {
+    e.stopPropagation()
+}
+document.querySelectorAll('.js-modal').forEach(a => {
+    a.addEventListener('click',openModal)
+})
