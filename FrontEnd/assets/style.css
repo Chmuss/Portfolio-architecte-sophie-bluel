@@ -332,3 +332,17 @@ h3 {
 	text-align:center;
 	color: #D65353;
 }
+.btn-styled {
+	display: block;
+	position: relative;
+	left: 80px;
+	bottom: 145px;
+	z-index: 1;
+	height: 20px;
+	width: 10px;
+	background-image: url(/FrontEnd/assets/icons/poubelle.png);
+	background-size: 14px;
+	padding-right: 8px;	
+}
+
+

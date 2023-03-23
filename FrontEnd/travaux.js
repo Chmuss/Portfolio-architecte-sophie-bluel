@@ -50,8 +50,40 @@ function filtretout() {
     title2.innerHTML = "éditer";
     figure2.appendChild(title2);
     galerie2.appendChild(figure2);
+
+
+
+
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'btn-styled';
+    button.onclick = async function() {
+        let autori = "bearer "+localStorage.getItem("token");
+        console.log(autori);
+        const supp = await fetch("http://localhost:5678/api/works/"+(travaux[i].id), {
+            method: "DELETE",
+            headers: {
+                'Accept': '*/*', 
+                'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY3OTU2NDg2NiwiZXhwIjoxNjc5NjUxMjY2fQ.uJdLI1KyF-criWgL96eNj4lyH6mnzwGcmiSl4rBBZwM'
+            },
+            body: {
+                
+            }
+        })
     };
+     const container = document.createElement("figcaption");
+     container.appendChild(button);
+     figure2.appendChild(container);
+
+
+
+    };
+    
 }
+
+
+
+
 
 function filtreobjets() {
     effacerdom();
@@ -94,6 +126,17 @@ function filtreobjets() {
         title2.innerHTML = "éditer";
         figure2.appendChild(title2);
         galerie2.appendChild(figure2);
+
+
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'btn-styled';
+        button.onclick = function() {
+        console.log(i);
+        };
+        const container = document.createElement("figcaption");
+        container.appendChild(button);
+        figure2.appendChild(container);
     }
     };
 }
@@ -140,6 +183,18 @@ function filtreappartements() {
         title2.innerHTML = "éditer";
         figure2.appendChild(title2);
         galerie2.appendChild(figure2);
+
+
+
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'btn-styled';
+        button.onclick = function() {
+        console.log(i);
+        };
+        const container = document.createElement("figcaption");
+        container.appendChild(button);
+        figure2.appendChild(container);
     }
     };
 
@@ -186,6 +241,17 @@ function filtrehotelsretaurants() {
         title2.innerHTML = "éditer";
         figure2.appendChild(title2);
         galerie2.appendChild(figure2);
+
+
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'btn-styled';
+        button.onclick = function() {
+        console.log(i);
+        };
+        const container = document.createElement("figcaption");
+        container.appendChild(button);
+        figure2.appendChild(container);
     }
     };
 }
