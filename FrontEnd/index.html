@@ -84,10 +84,35 @@
 					<br><br><br>
 					<h3>Ajout photo</h3>
 					<br><br>
-					<div class="gallery3">
-			
+					<form method="post" action="">
+
+					<div class="ajouterphoto">
+							<img src="/FrontEnd/assets/icons/ajouterunephoto.png" alt="Ajouter une photo" id="logophoto">
+							<!--<label for="imageinseree"></label>
+							<input type="file" id="imageinseree" name="imageinseree" accept="image/png, image/jpeg">-->
+							<div class="parent-div">
+								<button class="btn-upload">+ Ajouter photo</button>
+								<input type="file" id="imageinseree" name="imageinseree" accept="image/png, image/jpeg" />
+							</div>
+							<p id="formatimage">jpg. png : 4Mo max</p>
 					</div>
+					<br>
+					<label class="decale"for="titre">Titre</label>
 					<br><br>
+					<textarea type="text" rows="2" cols="62" name="titre" id="titre" class="decale"></textarea>
+					<br><br>
+					<label class="decale"for="categorie">Catégorie</label>
+					<br><br>
+					<select name="categorie" id="categorie">
+						<option value="Objets">Objets</option>
+						<option value="Appartements">Appartements</option>
+						<option value="Hotels & restaurants">Hotels & restaurants</option>
+					</select>
+					
+					<div class="trait"></div>
+					<br><br><br>
+					<input type="submit" value="Valider" id="boutonvalider"></input>
+				</form>
 				</div>
 			</aside>
 		</div>
