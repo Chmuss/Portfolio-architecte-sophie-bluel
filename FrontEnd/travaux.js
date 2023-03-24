@@ -307,10 +307,11 @@ const travaux = await recherchetravaux();
 filtretout();
 
 let ouverturemodal = null;
+let ouverturemodal2 = null;
 
 const openModal = function (e) {
     e.preventDefault();
-    /*const target = document.querySelector(e.target.getAttribute('href'));*/
+    
     const target = document.querySelector(".modal");
     target.style.display = null;
     target.removeAttribute('aria-hidden');
@@ -334,9 +335,46 @@ const closemodal = function (e) {
     
 }
 
+const openModal2 = function (e) {
+    e.preventDefault();
+
+    ouverturemodal.style.display = "none";
+    ouverturemodal.setAttribute('aria-modal', 'true');
+    ouverturemodal.removeAttribute('aria-modal');
+    ouverturemodal.removeEventListener('click', closemodal);
+    ouverturemodal.querySelector('.js-modal-close').removeEventListener('click', closemodal);
+    ouverturemodal.querySelector('.modalwrapper').removeEventListener('click', stopPropagation)
+    ouverturemodal= null
+    
+    const target2 = document.querySelector(".modal2");
+    target2.style.display = null;
+    target2.removeAttribute('aria-hidden');
+    target2.setAttribute('aria-modal', 'true');
+    ouverturemodal2 = target2;
+    ouverturemodal2.addEventListener('click',closemodal2);
+    ouverturemodal2.querySelector('.js-modal-close2').addEventListener('click', closemodal2);
+    ouverturemodal2.querySelector('.modalwrapper2').addEventListener('click', stopPropagation)
+}
+
+const closemodal2 = function (e) {
+    if (ouverturemodal2 === null) return;
+    e.preventDefault();
+    ouverturemodal2.style.display = "none";
+    ouverturemodal2.setAttribute('aria-modal', 'true');
+    ouverturemodal2.removeAttribute('aria-modal');
+    ouverturemodal2.removeEventListener('click', closemodal2);
+    ouverturemodal2.querySelector('.js-modal-close2').removeEventListener('click', closemodal2);
+    ouverturemodal2.querySelector('.modalwrapper2').removeEventListener('click', stopPropagation)
+    ouverturemodal2= null
+    
+}
+
 const stopPropagation = function (e) {
     e.stopPropagation()
 }
 document.querySelectorAll('.js-modal').forEach(a => {
     a.addEventListener('click',openModal)
+})
+document.querySelectorAll('.js-modal2').forEach(a => {
+    a.addEventListener('click',openModal2)
 })
