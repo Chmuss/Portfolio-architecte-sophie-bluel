@@ -57,13 +57,21 @@ function filtretout() {
     const button = document.createElement('button');
     button.type = 'button';
     button.className = 'btn-styled';
-    button.onclick = function(e) {
-      e.preventDefault();
-      deletework(travaux[i].id);
-      openModal();
+    button.onclick = async function() {
+        let autori = "bearer "+localStorage.getItem("token");
+        console.log(autori);
+        const supp = await fetch("http://localhost:5678/api/works/"+(travaux[i].id), {
+            method: "DELETE",
+            headers: {
+                'Accept': '*/*', 
+                'Authorization': autori
+            },
+            body: {
+                
+            }
+        })
         
     };
-
      const container = document.createElement("figcaption");
      container.appendChild(button);
      figure2.appendChild(container);
@@ -71,23 +79,9 @@ function filtretout() {
 
 
     };
-
     
 }
-async function deletework(id){
-    let autori = "bearer "+localStorage.getItem("token");
-        console.log(autori);
-        const supp = await fetch("http://localhost:5678/api/works/"+(id), {
-            method: "DELETE",
-            headers: {
-                'Accept': '*/*', 
-                'Authorization': autori
-            },
-        })
-        if (!res.ok) {
-            throw new Error('Failed to delete resource');
-        }
-}
+
 
 
 
@@ -462,8 +456,7 @@ async function saisieok() {
         alert("Veuillez saisir un titre");
         return
     }
-    const resulturlimage2=document.querySelector('.imageinseree').files[0];
-    console.log(document.querySelector('.imageinseree').files[0]);
+    const resulturlimage2=document.querySelector('.imageinseree').files[0].name;
     const resulturlimage="http://localhost:5678/images/"+resulturlimage2;
     const resulttitre=document.getElementById("titre").value;
     const resultcategorie2=document.getElementById("categorie").value;
@@ -479,7 +472,6 @@ async function saisieok() {
     console.log(resulttitre);
     console.log(resultcategorie);
     console.log(resulturlimage);
-    const data=createFormData(resulturlimage2,resulttitre,resultcategorie)
     let autori2 = "bearer "+localStorage.getItem("token");
     
     const envoiphoto = await fetch("http://localhost:5678/api/works", {
@@ -490,16 +482,15 @@ async function saisieok() {
                 'Content-Type': 'multipart/form-data',
                 
             },
-            body: data
+            body: JSON.stringify({
+                title: resulttitre,
+                imageUrl: resulturlimage,
+                categoryId: resultcategorie
+                
+            })
         })
-    
+    console.log(envoiphoto);
     const data2 = await envoiphoto.json();
     
 }
-export function createFormData(fileInput, titleInput, categoryInput) {
-    const uploadFormData = new FormData();
-    uploadFormData.append('image', fileInput.files[0]);
-    uploadFormData.append('title', titleInput.value)
-    uploadFormData.append('category', categoryInput.value)
-    return uploadFormData
-}
+
