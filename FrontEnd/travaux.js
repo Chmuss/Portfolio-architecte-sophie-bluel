@@ -18,12 +18,27 @@ function effacerdom() {
 }
 
 function filtretout() {
+    
     effacerdom()
     
     const section = document.getElementById("portfolio");
     const galerie = document.querySelector(".gallery");
+    const section2 = document.getElementById("portfolio");
+    const galerie2 = document.querySelector(".gallery2");
     
     for (let i=0; i<travaux.length; i++) {
+
+    affichagedom(i);
+
+    affichagegallerie(i);
+
+    };
+
+    
+}
+
+function affichagedom(i) {
+    const galerie = document.querySelector(".gallery");
     const figure = document.createElement("figure");
     const image = document.createElement("img");
     image.scr = travaux[i].imageUrl;
@@ -34,12 +49,10 @@ function filtretout() {
     title.innerHTML = travaux[i].title;
     figure.appendChild(title);
     galerie.appendChild(figure);
-    };
+}
 
-    const section2 = document.getElementById("portfolio");
+function affichagegallerie(i) {
     const galerie2 = document.querySelector(".gallery2");
-    
-    for (let i=0; i<travaux.length; i++) {
     const figure2 = document.createElement("figure2");
     const image2 = document.createElement("img");
     image2.scr = travaux[i].imageUrl;
@@ -50,30 +63,21 @@ function filtretout() {
     title2.innerHTML = "éditer";
     figure2.appendChild(title2);
     galerie2.appendChild(figure2);
-
-
-
-
     const button = document.createElement('button');
     button.type = 'button';
     button.className = 'btn-styled';
     button.onclick = function(e) {
       e.preventDefault();
       deletework(travaux[i].id);
-      openModal();
+      /*openModal();*/
         
     };
 
      const container = document.createElement("figcaption");
      container.appendChild(button);
      figure2.appendChild(container);
-
-
-
-    };
-
-    
 }
+
 async function deletework(id){
     let autori = "bearer "+localStorage.getItem("token");
         console.log(autori);
@@ -97,65 +101,19 @@ function filtreobjets() {
 
     const section = document.getElementById("portfolio");
     const galerie = document.querySelector(".gallery");
-     
-    for (let i=0; i<travaux.length; i++) {
-    let categ = travaux[i].categoryId;   
-      
-    if (categ == 1) {
-        const figure = document.createElement("figure");
-        const image = document.createElement("img");
-        image.scr = travaux[i].imageUrl;
-        image.setAttribute('src', image.scr);
-        figure.appendChild(image);
-        galerie.appendChild(figure);
-        const title = document.createElement("figcaption");
-        title.innerHTML = travaux[i].title;
-        figure.appendChild(title);
-        galerie.appendChild(figure);
-    }
-    };
-
-
     const section2 = document.getElementById("portfolio");
     const galerie2 = document.querySelector(".gallery2");
      
     for (let i=0; i<travaux.length; i++) {
+        let categ = travaux[i].categoryId;   
+      
+    if (categ == 1) {
+        affichagedom(i);
+    }
     let categ2 = travaux[i].categoryId;   
       
     if (categ2 == 1) {
-        const figure2 = document.createElement("figure2");
-        const image2 = document.createElement("img");
-        image2.scr = travaux[i].imageUrl;
-        image2.setAttribute('src', image2.scr);
-        figure2.appendChild(image2);
-        galerie2.appendChild(figure2);
-        const title2 = document.createElement("figcaption");
-        title2.innerHTML = "éditer";
-        figure2.appendChild(title2);
-        galerie2.appendChild(figure2);
-
-
-        const button = document.createElement('button');
-        button.type = 'button';
-        button.className = 'btn-styled';
-        button.onclick = async function() {
-            let autori = "bearer "+localStorage.getItem("token");
-            console.log(autori);
-            const supp = await fetch("http://localhost:5678/api/works/"+(travaux[i].id), {
-                method: "DELETE",
-                headers: {
-                    'Accept': '*/*', 
-                    'Authorization': autori
-                },
-                body: {
-                    
-                }
-            })
-            
-        };
-        const container = document.createElement("figcaption");
-        container.appendChild(button);
-        figure2.appendChild(container);
+        affichagegallerie(i);
     }
     };
 }
@@ -165,67 +123,19 @@ function filtreappartements() {
 
     const section = document.getElementById("portfolio");
     const galerie = document.querySelector(".gallery");
-     
-    for (let i=0; i<travaux.length; i++) {
-    let categ = travaux[i].categoryId;   
-      
-    if (categ == 2) {
-        const figure = document.createElement("figure");
-        const image = document.createElement("img");
-        image.scr = travaux[i].imageUrl;
-        image.setAttribute('src', image.scr);
-        figure.appendChild(image);
-        galerie.appendChild(figure);
-        const title = document.createElement("figcaption");
-        title.innerHTML = travaux[i].title;
-        figure.appendChild(title);
-        galerie.appendChild(figure);
-    }
-    };
-
-
-
     const section2 = document.getElementById("portfolio");
     const galerie2 = document.querySelector(".gallery2");
      
     for (let i=0; i<travaux.length; i++) {
+        let categ = travaux[i].categoryId;
+        if (categ == 2) {
+            affichagedom(i);
+        }
+
     let categ2 = travaux[i].categoryId;   
       
     if (categ2 == 2) {
-        const figure2 = document.createElement("figure2");
-        const image2 = document.createElement("img");
-        image2.scr = travaux[i].imageUrl;
-        image2.setAttribute('src', image2.scr);
-        figure2.appendChild(image2);
-        galerie2.appendChild(figure2);
-        const title2 = document.createElement("figcaption");
-        title2.innerHTML = "éditer";
-        figure2.appendChild(title2);
-        galerie2.appendChild(figure2);
-
-
-
-        const button = document.createElement('button');
-        button.type = 'button';
-        button.className = 'btn-styled';
-        button.onclick = async function() {
-            let autori = "bearer "+localStorage.getItem("token");
-            console.log(autori);
-            const supp = await fetch("http://localhost:5678/api/works/"+(travaux[i].id), {
-                method: "DELETE",
-                headers: {
-                    'Accept': '*/*', 
-                    'Authorization': autori
-                },
-                body: {
-                    
-                }
-            })
-            
-        };
-        const container = document.createElement("figcaption");
-        container.appendChild(button);
-        figure2.appendChild(container);
+        affichagegallerie(i);
     }
     };
 
@@ -236,65 +146,20 @@ function filtrehotelsretaurants() {
     
     const section = document.getElementById("portfolio");
     const galerie = document.querySelector(".gallery");
-     
-    for (let i=0; i<travaux.length; i++) {
-    let categ = travaux[i].categoryId;   
-     
-    if (categ == 3) {
-        const figure = document.createElement("figure");
-        const image = document.createElement("img");
-        image.scr = travaux[i].imageUrl;
-        image.setAttribute('src', image.scr);
-        figure.appendChild(image);
-        galerie.appendChild(figure);
-        const title = document.createElement("figcaption");
-        title.innerHTML = travaux[i].title;
-        figure.appendChild(title);
-        galerie.appendChild(figure);
-    }
-    };
-
-
     const section2 = document.getElementById("portfolio");
     const galerie2 = document.querySelector(".gallery2");
      
     for (let i=0; i<travaux.length; i++) {
+
+        let categ = travaux[i].categoryId;   
+    if (categ == 3) {
+        affichagedom(i);
+    }
+
     let categ2 = travaux[i].categoryId;   
      
     if (categ2 == 3) {
-        const figure2 = document.createElement("figure2");
-        const image2 = document.createElement("img");
-        image2.scr = travaux[i].imageUrl;
-        image2.setAttribute('src', image2.scr);
-        figure2.appendChild(image2);
-        galerie2.appendChild(figure2);
-        const title2 = document.createElement("figcaption");
-        title2.innerHTML = "éditer";
-        figure2.appendChild(title2);
-        galerie2.appendChild(figure2);
-
-
-        const button = document.createElement('button');
-        button.type = 'button';
-        button.className = 'btn-styled';
-        button.onclick = async function() {
-            let autori = "bearer "+localStorage.getItem("token");
-            console.log(autori);
-            const supp = await fetch("http://localhost:5678/api/works/"+(travaux[i].id), {
-                method: "DELETE",
-                headers: {
-                    'Accept': '*/*', 
-                    'Authorization': autori
-                },
-                body: {
-                    
-                }
-            })
-            
-        };
-        const container = document.createElement("figcaption");
-        container.appendChild(button);
-        figure2.appendChild(container);
+        affichagegallerie(i);
     }
     };
 }
