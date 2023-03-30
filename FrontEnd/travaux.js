@@ -68,17 +68,19 @@ function affichagegallerie(i) {
     button.className = 'btn-styled';
     button.onclick = function(e) {
       e.preventDefault();
-      deletework(travaux[i].id);
-      /*openModal();*/
-        
-    };
+      
+      if (confirm("Êtes-vous sûr de vouloir supprimer?")){
+      deletework(travaux[i].id);}
+    }
 
      const container = document.createElement("figcaption");
      container.appendChild(button);
      figure2.appendChild(container);
 }
 
+
 async function deletework(id){
+    
     let autori = "bearer "+localStorage.getItem("token");
         console.log(autori);
         const supp = await fetch("http://localhost:5678/api/works/"+(id), {
@@ -89,7 +91,7 @@ async function deletework(id){
             },
         })
         if (!res.ok) {
-            throw new Error('Failed to delete resource');
+            throw new Error('erreur pour effacer la ressource');
         }
 }
 
@@ -213,6 +215,7 @@ function visible() {
 
 const travaux = await recherchetravaux();
 let resultcategorie ;
+
 filtretout();
 
 let ouverturemodal = null;
@@ -306,10 +309,9 @@ function imageminiature() {
     const affichageimage2=document.getElementById('imageselectionee');
     const urlaffichageimage2 = document.querySelector('.imageinseree').files[0].name;
     const urlaffichageimage3 = ("assets/images/" + urlaffichageimage2);
-    console.log(urlaffichageimage3);
     document.getElementById("visuimage").src=urlaffichageimage3;
     affichageimage2.style.display = "";
-    console.log(affichageimage2)
+    
     
     
 }
@@ -317,7 +319,7 @@ function imageminiature() {
 
 async function saisieok() {
     
-    console.log(document.getElementById("image-inseree").value);
+    
     if (document.getElementById("image-inseree").value ==='') {
         alert("Veuillez saisir une image");
         return
@@ -327,9 +329,10 @@ async function saisieok() {
         alert("Veuillez saisir un titre");
         return
     }
-    const resulturlimage2=document.querySelector('.imageinseree').files[0];
-    console.log(document.querySelector('.imageinseree').files[0]);
-    const resulturlimage="http://localhost:5678/images/"+resulturlimage2;
+    const resulturlimage2=document.querySelector('.imageinseree').files[0].name;
+    
+    const resulturlimage='C:/Users/User/Documents/Portfolio-architecte-sophie-bluel/Backend/images/'+resulturlimage2;
+    
     const resulttitre=document.getElementById("titre").value;
     const resultcategorie2=document.getElementById("categorie").value;
     if (resultcategorie2 === "Objets") {
@@ -344,7 +347,8 @@ async function saisieok() {
     console.log(resulttitre);
     console.log(resultcategorie);
     console.log(resulturlimage);
-    const data=createFormData(resulturlimage2,resulttitre,resultcategorie)
+    /*const data=createFormData(resulturlimage2,resulttitre,resultcategorie)
+    console.log(data);*/
     let autori2 = "bearer "+localStorage.getItem("token");
     
     const envoiphoto = await fetch("http://localhost:5678/api/works", {
@@ -355,16 +359,19 @@ async function saisieok() {
                 'Content-Type': 'multipart/form-data',
                 
             },
-            body: data
+            body: JSON.stringify({
+                image: resulturlimage,
+                title: resulttitre,
+                category: resultcategorie
         })
     
-    const data2 = await envoiphoto.json();
+    /*const data2 = await envoiphoto.json();*/
     
-}
-export function createFormData(fileInput, titleInput, categoryInput) {
+})
+/*export function createFormData(fileInput, titleInput, categoryInput) {
     const uploadFormData = new FormData();
     uploadFormData.append('image', fileInput.files[0]);
     uploadFormData.append('title', titleInput.value)
     uploadFormData.append('category', categoryInput.value)
-    return uploadFormData
+    return uploadFormData*/
 }
