@@ -31,6 +31,7 @@ function filtretout() {
     affichagedom(i);
 
     affichagegallerie(i);
+    
 
     };
 
@@ -70,12 +71,17 @@ function affichagegallerie(i) {
       e.preventDefault();
       
       if (confirm("Êtes-vous sûr de vouloir supprimer?")){
-      deletework(travaux[i].id);}
+        deletework(travaux[i].id);
+        
+        }
     }
 
      const container = document.createElement("figcaption");
      container.appendChild(button);
      figure2.appendChild(container);
+     
+     
+     
 }
 
 
@@ -93,6 +99,7 @@ async function deletework(id){
         if (!res.ok) {
             throw new Error('erreur pour effacer la ressource');
         }
+        
 }
 
 
@@ -317,8 +324,20 @@ function imageminiature() {
 }
 
 
+const outputDiv= document.getElementById("imageselectionee")
+document.getElementById("image-inseree").addEventListener("input", function(e) {
+    const reader = new FileReader()
+    reader.onload = function(){
+        // dynamically adds an <img> tag into HTML
+        outputDiv.innerHTML = `
+        <img src=${reader.result} id="visuimage" class="visuimage" alt="Image téléchargée.">
+        `
+    }
+    outputDiv.style.display= "block"
+    reader.readAsDataURL(e.target.files[0]);
+});
+
 async function saisieok() {
-    
     
     if (document.getElementById("image-inseree").value ==='') {
         alert("Veuillez saisir une image");
@@ -329,10 +348,8 @@ async function saisieok() {
         alert("Veuillez saisir un titre");
         return
     }
-    const resulturlimage2=document.querySelector('.imageinseree').files[0].name;
-    
-    const resulturlimage='C:/Users/User/Documents/Portfolio-architecte-sophie-bluel/Backend/images/'+resulturlimage2;
-    
+    const resulturlimage2=document.getElementById('image-inseree').files[0];
+  
     const resulttitre=document.getElementById("titre").value;
     const resultcategorie2=document.getElementById("categorie").value;
     if (resultcategorie2 === "Objets") {
@@ -344,34 +361,27 @@ async function saisieok() {
     if (resultcategorie2 === "Hotels & restaurants") {
         resultcategorie = 3;
     }
-    console.log(resulttitre);
-    console.log(resultcategorie);
-    console.log(resulturlimage);
-    /*const data=createFormData(resulturlimage2,resulttitre,resultcategorie)
-    console.log(data);*/
-    let autori2 = "bearer "+localStorage.getItem("token");
+    const data= createFormData(resulturlimage2,resulttitre,resultcategorie)
+    let token = localStorage.getItem("token");
     
     const envoiphoto = await fetch("http://localhost:5678/api/works", {
             method: "POST",
             headers: {
                 'Accept': 'application/json', 
-                'Authorization': autori2,
-                'Content-Type': 'multipart/form-data',
-                
+                'Authorization': 'Bearer ' + token,  
+         
             },
-            body: JSON.stringify({
-                image: resulturlimage,
-                title: resulttitre,
-                category: resultcategorie
+            body: data
+            
         })
     
-    /*const data2 = await envoiphoto.json();*/
+    const data2 = await envoiphoto.json();
     
-})
-/*export function createFormData(fileInput, titleInput, categoryInput) {
+}
+export function createFormData(fileInput, titleInput, categoryInput) {
     const uploadFormData = new FormData();
-    uploadFormData.append('image', fileInput.files[0]);
-    uploadFormData.append('title', titleInput.value)
-    uploadFormData.append('category', categoryInput.value)
-    return uploadFormData*/
+    uploadFormData.append('image', fileInput);
+    uploadFormData.append('title', titleInput)
+    uploadFormData.append('category', categoryInput)
+    return uploadFormData
 }
