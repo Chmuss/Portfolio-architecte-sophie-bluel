@@ -328,7 +328,7 @@ const outputDiv= document.getElementById("imageselectionee")
 document.getElementById("image-inseree").addEventListener("input", function(e) {
     const reader = new FileReader()
     reader.onload = function(){
-        // dynamically adds an <img> tag into HTML
+        
         outputDiv.innerHTML = `
         <img src=${reader.result} id="visuimage" class="visuimage" alt="Image téléchargée.">
         `
@@ -348,6 +348,7 @@ async function saisieok() {
         alert("Veuillez saisir un titre");
         return
     }
+    
     const resulturlimage2=document.getElementById('image-inseree').files[0];
   
     const resulttitre=document.getElementById("titre").value;
@@ -375,7 +376,12 @@ async function saisieok() {
             
         })
     
-    const data2 = await envoiphoto.json();
+    if (envoiphoto.status === 201) {
+        alert('Le projet est enregistré');
+    }
+    
+    
+
     
 }
 export function createFormData(fileInput, titleInput, categoryInput) {
