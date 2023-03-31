@@ -1,15 +1,36 @@
+/* recherche des travaux dans l'API*/
 export async function recherchetravaux() {
     try {
-    const reponse = await fetch("http://localhost:5678/api/works");
-    return reponse.json();
-    
-      
+        const reponse = await fetch("http://localhost:5678/api/works");
+        return reponse.json();
     } 
     catch (error) {
         return error;
     }  
 }
 
+
+
+
+/* Les variable et constantes*/
+let affichebandeau = document.getElementById("bandeau");
+let affichemodifier1 = document.getElementById("modifier1");
+let affichemodifier2 = document.getElementById("modifier2");
+const travaux = await recherchetravaux();
+let resultcategorie ;
+let ouverturemodal = null;
+let ouverturemodal2 = null;
+
+
+
+
+/* a l'ouverture de la page , lanement de la function filtretout*/
+filtretout();
+
+
+
+
+/* les fonctions*/
 function effacerdom() {
     const effacer = document.querySelector(".gallery");
     effacer.replaceChildren();
@@ -18,24 +39,15 @@ function effacerdom() {
 }
 
 function filtretout() {
-    
     effacerdom()
-    
     const section = document.getElementById("portfolio");
     const galerie = document.querySelector(".gallery");
     const section2 = document.getElementById("portfolio");
     const galerie2 = document.querySelector(".gallery2");
-    
     for (let i=0; i<travaux.length; i++) {
-
-    affichagedom(i);
-
-    affichagegallerie(i);
-    
-
+        affichagedom(i);
+        affichagegallerie(i);
     };
-
-    
 }
 
 function affichagedom(i) {
@@ -68,27 +80,18 @@ function affichagegallerie(i) {
     button.type = 'button';
     button.className = 'btn-styled';
     button.onclick = function(e) {
-      e.preventDefault();
-      
-      if (confirm("Êtes-vous sûr de vouloir supprimer?")){
+        e.preventDefault();
+        if (confirm("Êtes-vous sûr de vouloir supprimer?")){
         deletework(travaux[i].id);
-        
         }
     }
-
-     const container = document.createElement("figcaption");
-     container.appendChild(button);
-     figure2.appendChild(container);
-     
-     
-     
+    const container = document.createElement("figcaption");
+    container.appendChild(button);
+    figure2.appendChild(container);
 }
 
-
 async function deletework(id){
-    
     let autori = "bearer "+localStorage.getItem("token");
-        console.log(autori);
         const supp = await fetch("http://localhost:5678/api/works/"+(id), {
             method: "DELETE",
             headers: {
@@ -99,108 +102,66 @@ async function deletework(id){
         if (!res.ok) {
             throw new Error('erreur pour effacer la ressource');
         }
-        
 }
-
-
-
 
 function filtreobjets() {
     effacerdom();
-
     const section = document.getElementById("portfolio");
     const galerie = document.querySelector(".gallery");
     const section2 = document.getElementById("portfolio");
     const galerie2 = document.querySelector(".gallery2");
-     
     for (let i=0; i<travaux.length; i++) {
         let categ = travaux[i].categoryId;   
-      
-    if (categ == 1) {
-        affichagedom(i);
-    }
-    let categ2 = travaux[i].categoryId;   
-      
-    if (categ2 == 1) {
-        affichagegallerie(i);
-    }
+        if (categ == 1) {
+            affichagedom(i);
+        }
+        let categ2 = travaux[i].categoryId;   
+        if (categ2 == 1) {
+            affichagegallerie(i);
+        }
     };
 }
 
 function filtreappartements() {
     effacerdom();
-
     const section = document.getElementById("portfolio");
     const galerie = document.querySelector(".gallery");
     const section2 = document.getElementById("portfolio");
     const galerie2 = document.querySelector(".gallery2");
-     
     for (let i=0; i<travaux.length; i++) {
         let categ = travaux[i].categoryId;
         if (categ == 2) {
             affichagedom(i);
         }
-
-    let categ2 = travaux[i].categoryId;   
-      
-    if (categ2 == 2) {
-        affichagegallerie(i);
-    }
+        let categ2 = travaux[i].categoryId;   
+        if (categ2 == 2) {
+            affichagegallerie(i);
+        }
     };
-
 }
 
 function filtrehotelsretaurants() {
     effacerdom();
-    
     const section = document.getElementById("portfolio");
     const galerie = document.querySelector(".gallery");
     const section2 = document.getElementById("portfolio");
     const galerie2 = document.querySelector(".gallery2");
-     
     for (let i=0; i<travaux.length; i++) {
-
         let categ = travaux[i].categoryId;   
-    if (categ == 3) {
-        affichagedom(i);
-    }
-
-    let categ2 = travaux[i].categoryId;   
-     
-    if (categ2 == 3) {
-        affichagegallerie(i);
-    }
+        if (categ == 3) {
+            affichagedom(i);
+        }
+        let categ2 = travaux[i].categoryId;   
+        if (categ2 == 3) {
+            affichagegallerie(i);
+        }
     };
 }
-const toutletravail = document.getElementById("tous");
-toutletravail.addEventListener("click", function() {
-    filtretout()
-})
-const toutlesobjets = document.getElementById("objets");
-toutlesobjets.addEventListener("click", function() {
-    filtreobjets()
-})
-const toutlesappartements = document.getElementById("appartements");
-toutlesappartements.addEventListener("click", function() {
-    filtreappartements()
-})
-const toutleshotelsretaurants = document.getElementById("hotelsretaurants");
-toutleshotelsretaurants.addEventListener("click", function() {
-    filtrehotelsretaurants()
-})
-
-
-let affichebandeau = document.getElementById("bandeau");
-let affichemodifier1 = document.getElementById("modifier1");
-let affichemodifier2 = document.getElementById("modifier2");
 
 if (localStorage.getItem("token") !== null) {
-    
-    
     valeurlogin.textContent = "logout";
     visible();
-
-}  else {    
+    }  else {    
     valeurlogin.textContent = "login";
     nonvisible();
     
@@ -210,27 +171,16 @@ function nonvisible() {
     affichebandeau.style.visibility = "hidden";
     affichemodifier1.style.visibility = "hidden";
     affichemodifier2.style.visibility = "hidden";
-    
-    
 }
+
 function visible() {
     affichebandeau.style.visibility = "visible";
     affichemodifier1.style.visibility = "visible";
     affichemodifier2.style.visibility = "visible";
-    
 }
-
-const travaux = await recherchetravaux();
-let resultcategorie ;
-
-filtretout();
-
-let ouverturemodal = null;
-let ouverturemodal2 = null;
 
 const openModal = function (e) {
     e.preventDefault();
-    
     const target = document.querySelector(".modal");
     target.style.display = null;
     target.removeAttribute('aria-hidden');
@@ -251,12 +201,10 @@ const closemodal = function (e) {
     ouverturemodal.querySelector('.js-modal-close').removeEventListener('click', closemodal);
     ouverturemodal.querySelector('.modalwrapper').removeEventListener('click', stopPropagation)
     ouverturemodal= null
-    
 }
 
 const openModal2 = function (e) {
     e.preventDefault();
-
     ouverturemodal.style.display = "none";
     ouverturemodal.setAttribute('aria-modal', 'true');
     ouverturemodal.removeAttribute('aria-modal');
@@ -264,7 +212,6 @@ const openModal2 = function (e) {
     ouverturemodal.querySelector('.js-modal-close').removeEventListener('click', closemodal);
     ouverturemodal.querySelector('.modalwrapper').removeEventListener('click', stopPropagation)
     ouverturemodal= null
-    
     const target2 = document.querySelector(".modal2");
     target2.style.display = null;
     target2.removeAttribute('aria-hidden');
@@ -289,26 +236,11 @@ const closemodal2 = function (e) {
     affichageimage.style.display = "";
     const affichageimage2=document.getElementById('imageselectionee');
     affichageimage2.style.display = "none";
-    
 }
 
 const stopPropagation = function (e) {
     e.stopPropagation()
 }
-document.querySelectorAll('.js-modal').forEach(a => {
-    a.addEventListener('click',openModal)
-})
-document.querySelectorAll('.js-modal2').forEach(a => {
-    a.addEventListener('click',openModal2)
-})
-document.querySelectorAll('.jevalide').forEach(a => {
-    a.addEventListener('click',saisieok)
-})
-
-
-document.querySelectorAll('.imageinseree').forEach(a => {
-    a.addEventListener("change",imageminiature)
-})
 
 function imageminiature() {
     const affichageimage=document.getElementById('demandeimage');
@@ -318,17 +250,12 @@ function imageminiature() {
     const urlaffichageimage3 = ("assets/images/" + urlaffichageimage2);
     document.getElementById("visuimage").src=urlaffichageimage3;
     affichageimage2.style.display = "";
-    
-    
-    
 }
-
 
 const outputDiv= document.getElementById("imageselectionee")
 document.getElementById("image-inseree").addEventListener("input", function(e) {
     const reader = new FileReader()
     reader.onload = function(){
-        
         outputDiv.innerHTML = `
         <img src=${reader.result} id="visuimage" class="visuimage" alt="Image téléchargée.">
         `
@@ -338,19 +265,15 @@ document.getElementById("image-inseree").addEventListener("input", function(e) {
 });
 
 async function saisieok() {
-    
     if (document.getElementById("image-inseree").value ==='') {
         alert("Veuillez saisir une image");
         return
     }
-    
     if (document.getElementById("titre").value === "") {
         alert("Veuillez saisir un titre");
         return
     }
-    
     const resulturlimage2=document.getElementById('image-inseree').files[0];
-  
     const resulttitre=document.getElementById("titre").value;
     const resultcategorie2=document.getElementById("categorie").value;
     if (resultcategorie2 === "Objets") {
@@ -364,7 +287,6 @@ async function saisieok() {
     }
     const data= createFormData(resulturlimage2,resulttitre,resultcategorie)
     let token = localStorage.getItem("token");
-    
     const envoiphoto = await fetch("http://localhost:5678/api/works", {
             method: "POST",
             headers: {
@@ -375,15 +297,11 @@ async function saisieok() {
             body: data
             
         })
-    
     if (envoiphoto.status === 201) {
         alert('Le projet est enregistré');
     }
-    
-    
-
-    
 }
+
 export function createFormData(fileInput, titleInput, categoryInput) {
     const uploadFormData = new FormData();
     uploadFormData.append('image', fileInput);
@@ -391,3 +309,36 @@ export function createFormData(fileInput, titleInput, categoryInput) {
     uploadFormData.append('category', categoryInput)
     return uploadFormData
 }
+
+
+
+
+/* les evenements au click de la souris */
+const toutletravail = document.getElementById("tous");
+toutletravail.addEventListener("click", function() {
+    filtretout()
+})
+const toutlesobjets = document.getElementById("objets");
+toutlesobjets.addEventListener("click", function() {
+    filtreobjets()
+})
+const toutlesappartements = document.getElementById("appartements");
+toutlesappartements.addEventListener("click", function() {
+    filtreappartements()
+})
+const toutleshotelsretaurants = document.getElementById("hotelsretaurants");
+toutleshotelsretaurants.addEventListener("click", function() {
+    filtrehotelsretaurants()
+})
+document.querySelectorAll('.js-modal').forEach(a => {
+    a.addEventListener('click',openModal)
+})
+document.querySelectorAll('.js-modal2').forEach(a => {
+    a.addEventListener('click',openModal2)
+})
+document.querySelectorAll('.jevalide').forEach(a => {
+    a.addEventListener('click',saisieok)
+})
+document.querySelectorAll('.imageinseree').forEach(a => {
+    a.addEventListener("change",imageminiature)
+})
