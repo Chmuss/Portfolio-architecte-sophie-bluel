@@ -12,7 +12,7 @@ export async function recherchetravaux() {
 
 
 
-/* Les variable et constantes*/
+/* Les variables et constantes*/
 let affichebandeau = document.getElementById("bandeau");
 let affichemodifier1 = document.getElementById("modifier1");
 let affichemodifier2 = document.getElementById("modifier2");
@@ -24,7 +24,7 @@ let ouverturemodal2 = null;
 
 
 
-/* a l'ouverture de la page , lanement de la function filtretout*/
+/* a l'ouverture de la page , lancement de la function filtretout*/
 filtretout();
 
 
