@@ -24,6 +24,7 @@ let ouverturemodal2 = null;
 
 
 
+
 /* a l'ouverture de la page , lancement de la function filtretout*/
 filtretout();
 
@@ -104,7 +105,7 @@ async function deletework(id){
         }
 }
 
-function filtreobjets() {
+function filtreparcategorie(categorie) {
     effacerdom();
     const section = document.getElementById("portfolio");
     const galerie = document.querySelector(".gallery");
@@ -112,47 +113,8 @@ function filtreobjets() {
     const galerie2 = document.querySelector(".gallery2");
     for (let i=0; i<travaux.length; i++) {
         let categ = travaux[i].categoryId;   
-        if (categ == 1) {
+        if (categ == categorie) {
             affichagedom(i);
-        }
-        let categ2 = travaux[i].categoryId;   
-        if (categ2 == 1) {
-            affichagegallerie(i);
-        }
-    };
-}
-
-function filtreappartements() {
-    effacerdom();
-    const section = document.getElementById("portfolio");
-    const galerie = document.querySelector(".gallery");
-    const section2 = document.getElementById("portfolio");
-    const galerie2 = document.querySelector(".gallery2");
-    for (let i=0; i<travaux.length; i++) {
-        let categ = travaux[i].categoryId;
-        if (categ == 2) {
-            affichagedom(i);
-        }
-        let categ2 = travaux[i].categoryId;   
-        if (categ2 == 2) {
-            affichagegallerie(i);
-        }
-    };
-}
-
-function filtrehotelsretaurants() {
-    effacerdom();
-    const section = document.getElementById("portfolio");
-    const galerie = document.querySelector(".gallery");
-    const section2 = document.getElementById("portfolio");
-    const galerie2 = document.querySelector(".gallery2");
-    for (let i=0; i<travaux.length; i++) {
-        let categ = travaux[i].categoryId;   
-        if (categ == 3) {
-            affichagedom(i);
-        }
-        let categ2 = travaux[i].categoryId;   
-        if (categ2 == 3) {
             affichagegallerie(i);
         }
     };
@@ -320,15 +282,15 @@ toutletravail.addEventListener("click", function() {
 })
 const toutlesobjets = document.getElementById("objets");
 toutlesobjets.addEventListener("click", function() {
-    filtreobjets()
+    filtreparcategorie(1)
 })
 const toutlesappartements = document.getElementById("appartements");
 toutlesappartements.addEventListener("click", function() {
-    filtreappartements()
+    filtreparcategorie(2)
 })
 const toutleshotelsretaurants = document.getElementById("hotelsretaurants");
 toutleshotelsretaurants.addEventListener("click", function() {
-    filtrehotelsretaurants()
+    filtreparcategorie(3)
 })
 document.querySelectorAll('.js-modal').forEach(a => {
     a.addEventListener('click',openModal)
