@@ -221,6 +221,7 @@ a:hover {
 }
 .decale {
 	margin-left: 35%;
+	
 }
 #saisieemail, #saisiemotdepasse {
 	margin-top: 2px;
@@ -374,11 +375,6 @@ h3 {
 	border-radius: 3px;
 	padding-top: 28px;
 }
-.decale {
-	margin-left: 10%;
-	
-	
-}
 label {
 	margin-top: 100px;
 }
@@ -451,4 +447,7 @@ label {
 	height: 150px;
 	margin: auto;
 
+}
+#clicbouton {
+	height: 40px;
 }
