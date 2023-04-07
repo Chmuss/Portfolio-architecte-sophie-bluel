@@ -16,12 +16,13 @@ export async function recherchetravaux() {
 let affichebandeau = document.getElementById("bandeau");
 let affichemodifier1 = document.getElementById("modifier1");
 let affichemodifier2 = document.getElementById("modifier2");
-const travaux = await recherchetravaux();
+let travaux = await recherchetravaux();
 let resultcategorie ;
 let ouverturemodal = null;
 let ouverturemodal2 = null;
 let veriftitre = 0;
 let imagechargee = "non";
+let numfiltre = 0;
 
 
 
@@ -42,7 +43,8 @@ function effacerdom() {
 }
 
 function filtretout() {
-    effacerdom()
+    numfiltre = 0;
+    effacerdom();
     const section = document.getElementById("portfolio");
     const galerie = document.querySelector(".gallery");
     const section2 = document.getElementById("portfolio");
@@ -82,11 +84,27 @@ function affichagegallerie(i) {
     const button = document.createElement('button');
     button.type = 'button';
     button.className = 'btn-styled';
-    button.onclick = function(e) {
+    button.onclick = async function(e) {
         e.preventDefault();
         if (confirm("Êtes-vous sûr de vouloir supprimer?")){
         deletework(travaux[i].id);
+        closemodal(e);
+        travaux = await recherchetravaux();
+        if (numfiltre === 0){
+            filtretout(); 
+        } 
+        if (numfiltre === 1){
+            filtreparcategorie(1); 
+        } 
+        if (numfiltre === 2){
+            filtreparcategorie(2); 
+        } 
+        if (numfiltre === 3){
+            filtreparcategorie(3); 
+        } 
+        openModal(e);
         }
+        
     }
     const container = document.createElement("figcaption");
     container.appendChild(button);
@@ -102,12 +120,13 @@ async function deletework(id){
                 'Authorization': autori
             },
         })
-        if (!res.ok) {
+        /*if (!res.ok) {
             throw new Error('erreur pour effacer la ressource');
-        }
+        }*/
 }
 
 function filtreparcategorie(categorie) {
+    numfiltre = categorie;
     effacerdom();
     const section = document.getElementById("portfolio");
     const galerie = document.querySelector(".gallery");
@@ -164,7 +183,7 @@ const closemodal = function (e) {
     ouverturemodal.removeEventListener('click', closemodal);
     ouverturemodal.querySelector('.js-modal-close').removeEventListener('click', closemodal);
     ouverturemodal.querySelector('.modalwrapper').removeEventListener('click', stopPropagation)
-    ouverturemodal= null
+    ouverturemodal= null;
 }
 
 const openModal2 = function (e) {
