@@ -20,6 +20,8 @@ const travaux = await recherchetravaux();
 let resultcategorie ;
 let ouverturemodal = null;
 let ouverturemodal2 = null;
+let veriftitre = 0;
+let imagechargee = "non";
 
 
 
@@ -166,7 +168,11 @@ const closemodal = function (e) {
 }
 
 const openModal2 = function (e) {
+    document.querySelectorAll('#visuimage').forEach(a => {
+        a.addEventListener('load',chargementimage)
+    })
     e.preventDefault();
+    verifForm();
     ouverturemodal.style.display = "none";
     ouverturemodal.setAttribute('aria-modal', 'true');
     ouverturemodal.removeAttribute('aria-modal');
@@ -198,6 +204,12 @@ const closemodal2 = function (e) {
     affichageimage.style.display = "";
     const affichageimage2=document.getElementById('imageselectionee');
     affichageimage2.style.display = "none";
+    imagechargee ="non";
+    veriftitre = 0;
+    const raztitre=document.getElementById('titre');
+    raztitre.value=null;
+
+    
 }
 
 const stopPropagation = function (e) {
@@ -271,7 +283,28 @@ export function createFormData(fileInput, titleInput, categoryInput) {
     uploadFormData.append('category', categoryInput)
     return uploadFormData
 }
-
+function verifForm() {
+    if(imagechargee ==="oui" && veriftitre !=0) {
+            boutonvalider.style.background = "#1D6154";
+    } else {
+        boutonvalider.style.background = "#A7A7A7"
+        
+    }
+}
+function touchepressee() {
+        veriftitre ++;
+        verifForm();
+}
+function toucheenmoins() {
+    if (window.event.keyCode==8 || window.event.keyCode==46){
+        veriftitre --;
+        verifForm();
+    }
+}
+function chargementimage() {
+    imagechargee = "oui";
+    verifForm();
+}
 
 
 
@@ -302,5 +335,11 @@ document.querySelectorAll('.jevalide').forEach(a => {
     a.addEventListener('click',saisieok)
 })
 document.querySelectorAll('.imageinseree').forEach(a => {
-    a.addEventListener("change",imageminiature)
+    a.addEventListener("change",imageminiature,)
+})
+document.querySelectorAll('#titre').forEach(a => {
+    a.addEventListener('keypress',touchepressee)
+})
+document.querySelectorAll('#titre').forEach(a => {
+    a.addEventListener('keydown',toucheenmoins)
 })
