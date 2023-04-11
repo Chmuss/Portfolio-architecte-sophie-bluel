@@ -120,9 +120,9 @@ async function deletework(id){
                 'Authorization': autori
             },
         })
-        /*if (!res.ok) {
-            throw new Error('erreur pour effacer la ressource');
-        }*/
+        if (!supp.ok) {
+            alert('erreur pour effacer la ressource');
+        }
 }
 
 function filtreparcategorie(categorie) {
@@ -257,7 +257,7 @@ document.getElementById("image-inseree").addEventListener("input", function(e) {
     reader.readAsDataURL(e.target.files[0]);
 });
 
-async function saisieok() {
+async function saisieok(e) {
     if (document.getElementById("image-inseree").value ==='') {
         alert("Veuillez saisir une image");
         return
@@ -292,6 +292,21 @@ async function saisieok() {
         })
     if (envoiphoto.status === 201) {
         alert('Le projet est enregistré');
+        closemodal2(e);
+        travaux = await recherchetravaux();
+        if (numfiltre === 0){
+            filtretout(); 
+        } 
+        if (numfiltre === 1){
+            filtreparcategorie(1); 
+        } 
+        if (numfiltre === 2){
+            filtreparcategorie(2); 
+        } 
+        if (numfiltre === 3){
+            filtreparcategorie(3); 
+        } 
+        openModal(e);
     }
 }
 
