@@ -23,6 +23,7 @@ let ouverturemodal2 = null;
 let veriftitre = 0;
 let imagechargee = "non";
 let numfiltre = 0;
+let titrecheck = false;
 
 
 
@@ -318,7 +319,7 @@ export function createFormData(fileInput, titleInput, categoryInput) {
     return uploadFormData
 }
 function verifForm() {
-    if(imagechargee ==="oui" && veriftitre !=0) {
+    if(imagechargee ==="oui" && titrecheck === true) {
             boutonvalider.style.background = "#1D6154";
     } else {
         boutonvalider.style.background = "#A7A7A7"
@@ -326,15 +327,15 @@ function verifForm() {
     }
 }
 function touchepressee() {
-        veriftitre ++;
-        verifForm();
+    const titreinput = document.getElementById('titre');
+    if (titreinput.value){
+        titrecheck = true;
+    }else {
+        titrecheck = false;
+    };
+    verifForm();
 }
-function toucheenmoins() {
-    if (window.event.keyCode==8 || window.event.keyCode==46){
-        veriftitre --;
-        verifForm();
-    }
-}
+
 function chargementimage() {
     imagechargee = "oui";
     verifForm();
@@ -365,15 +366,6 @@ document.querySelectorAll('.js-modal').forEach(a => {
 document.querySelectorAll('.js-modal2').forEach(a => {
     a.addEventListener('click',openModal2)
 })
-document.querySelectorAll('.jevalide').forEach(a => {
-    a.addEventListener('click',saisieok)
-})
-document.querySelectorAll('.imageinseree').forEach(a => {
-    a.addEventListener("change",imageminiature,)
-})
-document.querySelectorAll('#titre').forEach(a => {
-    a.addEventListener('keypress',touchepressee)
-})
-document.querySelectorAll('#titre').forEach(a => {
-    a.addEventListener('keydown',toucheenmoins)
-})
+document.querySelector('#titre').addEventListener('input',touchepressee);
+document.querySelector('.imageinseree').addEventListener("change",imageminiature,);
+document.querySelector('.jevalide').addEventListener('click',saisieok);

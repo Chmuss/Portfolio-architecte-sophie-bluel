@@ -13,15 +13,14 @@ async function recherchelogin() {
             })
         })
     const data = await reponse.json();
-    console.log(data);
     if (reponse.status == 200) {
-        
         localStorage.setItem("token", data.token);
         document.location.href="index.html";
-        
-    } else {
-        alert("E-mail ou mot de passe invalide");
-        
+    } else 
+        if (reponse.status == 401) {
+            alert("Mot de passe invalide");
+        } else {
+            alert("E-mail ou mot de passe invalide");
     }
 };
 localStorage.removeItem("token");
